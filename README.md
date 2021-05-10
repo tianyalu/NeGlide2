@@ -13,7 +13,7 @@
 * 手动移除的区分
 * 关闭线程
 
-![image](https://github.com/tianyalu/NeGlide/raw/master/show/active_cache.png)
+![image](https://github.com/tianyalu/NeGlide2/raw/master/show/active_cache.png)
 
 ## 三、`Glide`手实现之内存缓存
 
