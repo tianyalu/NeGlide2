@@ -1,6 +1,8 @@
 package com.sty.ne.glide.cache;
 
+import com.sty.ne.glide.Tool;
 import com.sty.ne.glide.resource.Value;
+import com.sty.ne.glide.resource.ValueCallback;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -20,6 +22,11 @@ public class ActiveCache {
     private boolean isCloseThread;
     private Thread thread;
     private boolean isManualRemoved;
+    private ValueCallback valueCallback;
+
+    public ActiveCache(ValueCallback valueCallback) {
+        this.valueCallback = valueCallback;
+    }
 
     /**
      * 添加活动缓存
@@ -27,6 +34,10 @@ public class ActiveCache {
      * @param value
      */
     public void put(String key, Value value) {
+        Tool.checkNotEmpty(key);
+
+        //绑定Value的监听 --> Value发起来的（Value没有被使用了就会发起这个监听，给外界业务去使用）
+        value.setCallback(valueCallback);
         //存储 --> 容器
         mapList.put(key, new CustomWeakReference(value, getQueue(), key));
     }
@@ -64,17 +75,20 @@ public class ActiveCache {
      */
     public void closeThread() {
         isCloseThread = true;
-        if(null != thread) {
-            thread.interrupt(); //中断线程
-            try {
-                thread.join(TimeUnit.SECONDS.toMillis(5)); //线程稳定、安全地停下来
-                if(thread.isAlive()) { //证明线程还是没有结束
-                    throw new IllegalStateException("活动缓存中关闭线程，线程最终未停止...");
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        if(null != thread) {
+//            thread.interrupt(); //中断线程
+//            try {
+//                thread.join(TimeUnit.SECONDS.toMillis(5)); //线程稳定、安全地停下来
+//                if(thread.isAlive()) { //证明线程还是没有结束
+//                    throw new IllegalStateException("活动缓存中关闭线程，线程最终未停止...");
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        mapList.clear();
+        System.gc();
     }
 
     /**
@@ -103,15 +117,17 @@ public class ActiveCache {
                 public void run() {
                     super.run();
                     while(!isCloseThread) {
-                        try {
-                            Reference<? extends Value> remove = queue.remove(); //如果被回收了就会执行到这个方法 <-- 阻塞方法
-                            CustomWeakReference weakReference = (CustomWeakReference) remove;
-                            //移除容器
-                            if(mapList != null && !mapList.isEmpty() && !isManualRemoved) { //区分是否为手动移除的
-                                mapList.remove(weakReference.key);
+                        if( !isManualRemoved) { //区分是否为手动移除的
+                            try {
+                                Reference<? extends Value> remove = queue.remove(); //如果被回收了就会执行到这个方法 <-- 阻塞方法
+                                CustomWeakReference weakReference = (CustomWeakReference) remove;
+                                //移除容器
+                                if (mapList != null && !mapList.isEmpty()) {
+                                    mapList.remove(weakReference.key);
+                                }
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
                     }
                 }
