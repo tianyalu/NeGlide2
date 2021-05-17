@@ -11,6 +11,8 @@ public class Key {
     private String key; // 例如：900d489a4c4c31235dc856b6a982c4e0ae1f53f14dbf04733107b51553562c0a
 
     /**
+     * http://www.ttmd5.com/hash.php?type=9
+     *
      * sha256（https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg ）
      * = 900d489a4c4c31235dc856b6a982c4e0ae1f53f14dbf04733107b51553562c0a
      * @param key

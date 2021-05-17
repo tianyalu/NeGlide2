@@ -20,7 +20,7 @@
 
 `LRU`算法：最近没有使用的元素，会自动被移除
 
-`LruCache`  `v4`包 <-- `LinkedHashMap<K, V>`  --> 拥有插入排序的功能
+`LruCache`  `v4`包 <-- `LinkedHashMap<K, V>`  --> 拥有访问排序的功能
 
 职责：
 
@@ -43,7 +43,20 @@
 
 ## 四、`Glide`手写实现之磁盘缓存
 
+磁盘缓存：保存时间比较长，保存在磁盘中，以文件的形式存储。
 
+`LRU`算法：最近没有使用的元素，会自动被移除
+
+> 1. `LruCache`  `v4`包 <-- `LinkedHashMap<K, V>`  --> 拥有访问排序的功能;
+> 2. `DiskLruCache` -> `Android` 中没有提供 --> [`DiskLruCache`](https://github.com/JakeWharton/DiskLruCache)
+
+### 4.1 磁盘缓存
+
+![image](https://github.com/tianyalu/NeGlide2/raw/master/show/disk_cache.png)
+
+### 4.2 缓存结构
+
+![image](https://github.com/tianyalu/NeGlide2/raw/master/show/cache_structure.png)
 
 ## 五、`Glide`手写实现之什么周期
 
