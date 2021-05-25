@@ -58,8 +58,18 @@
 
 ![image](https://github.com/tianyalu/NeGlide2/raw/master/show/cache_structure.png)
 
-## 五、`Glide`手写实现之什么周期
+## 五、`Glide`手写实现之生命周期
 
+生命周期的管理：`Application`不能去管理，`FragmentActivity`可以去管理，`Activity`也可以去管理。
 
+管理的方式：在`Activity`组件上附加`Fragment`，通过`Fragment`监听组件的生命周期。
+
+> `Activity --> app Fragment`
+>
+> `AppCompatActivity --> v4包`
+
+为什么要发送一次`Handler`？：我们的`Android`是基于`Handler`消息的，`LAUNCH_ACTIVITY`，为了让我们的`fragment`不用排队列中，为了下次可以取到。
+
+移除`Handler`。
 
 ## 六、`Glide`手写实现之加载图片
