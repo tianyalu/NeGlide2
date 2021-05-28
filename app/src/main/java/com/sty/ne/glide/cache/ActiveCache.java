@@ -1,5 +1,7 @@
 package com.sty.ne.glide.cache;
 
+import android.util.Log;
+
 import com.sty.ne.glide.Tool;
 import com.sty.ne.glide.resource.Value;
 import com.sty.ne.glide.resource.ValueCallback;
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  * Description: 活动缓存-->真正被使用的资源
  */
 public class ActiveCache {
+    private static final String TAG = ActiveCache.class.getSimpleName();
     private Map<String, WeakReference<Value>> mapList = new HashMap<>();
     private ReferenceQueue<Value> queue;
     private boolean isCloseThread;
@@ -123,6 +126,7 @@ public class ActiveCache {
                                 CustomWeakReference weakReference = (CustomWeakReference) remove;
                                 //移除容器
                                 if (mapList != null && !mapList.isEmpty()) {
+                                    Log.e(TAG, "key: " + weakReference.key + " is recycled");
                                     mapList.remove(weakReference.key);
                                 }
                             } catch (InterruptedException e) {

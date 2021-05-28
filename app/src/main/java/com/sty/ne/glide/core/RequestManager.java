@@ -101,12 +101,14 @@ public class RequestManager {
 
     /**
      * 拿到要显示的图片路径
-     * @param s
+     * @param path
      * @return
      */
-    public RequestTargetEngine load(String s) {
+    public RequestTargetEngine load(String path) {
         //移除Handler
         mHandler.removeMessages(NEXT_HANDLER_MSG);
+        //把值传递给资源加载引擎
+        requestTargetEngine.loadValueInitAction(path, requestManagerContext);
         return requestTargetEngine;
     }
 }

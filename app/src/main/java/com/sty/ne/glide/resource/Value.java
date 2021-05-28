@@ -57,9 +57,10 @@ public class Value {
      * 使用完成（不使用）就减一
      */
     public void nonUseAction() {
-        if(count-- <= 0 && callback != null) {
+        count--;
+        if(count <= 0 && callback != null) {
             //回调告诉外界，不再使用了
-            callback.valueMonUseListener(key, this);
+            callback.valueNonUseListener(key, this);
         }
     }
 

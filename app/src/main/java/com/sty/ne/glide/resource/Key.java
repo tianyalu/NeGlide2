@@ -19,7 +19,7 @@ public class Key {
      */
     public Key(String key) {
         //this.key = key;
-        key = Tool.getSHA256StrJava(key);
+        this.key = Tool.getSHA256StrJava(key);
     }
 
     public String getKey() {

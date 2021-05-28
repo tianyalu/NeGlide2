@@ -73,3 +73,10 @@
 移除`Handler`。
 
 ## 六、`Glide`手写实现之加载图片
+
+组装拼接之前的所有内容（缓存） --> `Glide`
+
+加载资源 --> 缓存 --> 网络/`SD`卡 加载资源 --> 成功后保存到缓存中
+
+![image](https://github.com/tianyalu/NeGlide2/raw/master/show/image_load_process.png)
+

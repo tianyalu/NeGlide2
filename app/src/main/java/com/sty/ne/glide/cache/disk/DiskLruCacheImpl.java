@@ -29,12 +29,12 @@ public class DiskLruCacheImpl {
     private final long MAX_SIZE = 1024 * 1024 * 10; //可以修改为使用者可设置的
     private DiskLruCache diskLruCache;
 
-    public DiskLruCacheImpl(Context context) {
-        File file = new File(context.getExternalFilesDir(null) + File.separator
+    public DiskLruCacheImpl() {
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator
                 + DISK_LRU_CACHE_DIR);
         try {
             diskLruCache = DiskLruCache.open(file, APP_VERSION, VALUE_COUNT, MAX_SIZE);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
