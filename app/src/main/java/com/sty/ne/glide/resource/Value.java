@@ -47,9 +47,10 @@ public class Value {
     public void useAction() {
         Tool.checkNotEmpty(mBitmap);
         if(mBitmap.isRecycled()) { //已经被回收了
-            Log.d(TAG, "useAction: 加一 count: " + count);
+            Log.d(TAG, "useAction: 已经被回收了");
             return;
         }
+        Log.d(TAG, "useAction: 加一 count:" + count);
         count++;
     }
 
@@ -61,6 +62,7 @@ public class Value {
         if(count <= 0 && callback != null) {
             //回调告诉外界，不再使用了
             callback.valueNonUseListener(key, this);
+            Log.d(TAG, "useAction: 减一 count:" + count);
         }
     }
 

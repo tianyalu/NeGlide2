@@ -41,6 +41,7 @@ public class RequestTargetEngine implements LifecycleCallback, ValueCallback, Me
     public RequestTargetEngine() {
         if(activeCache == null) {
             activeCache = new ActiveCache(this); //回调告诉外界，Value资源不再使用了
+            //Log.e(TAG, "activeCache initialized");
         }
         if(memoryCache == null) {
             memoryCache = new MemoryCache(MEMORY_MAX_SIZE);
@@ -147,6 +148,7 @@ public class RequestTargetEngine implements LifecycleCallback, ValueCallback, Me
     public void valueNonUseListener(String key, Value value) {
         //把活动缓存操作的Value资源加入到内存缓存
         if(key != null && value != null) {
+            //Log.e(TAG, "加入到内存缓存key： " + key);
             memoryCache.put(key, value);
         }
     }

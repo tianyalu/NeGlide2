@@ -25,7 +25,7 @@ public class RequestManager {
     private final String FRAGMENT_ACTIVITY_NAME = "Fragment_Activity_Name";
     private final String ACTIVITY_NAME = "Activity_Name";
     private Context requestManagerContext;
-    private RequestTargetEngine requestTargetEngine;
+    private static RequestTargetEngine requestTargetEngine;  //static important
     private FragmentActivity fragmentActivity;
 
     //构造代码块，不用在所有的构造方法中去实例化了，统一去写

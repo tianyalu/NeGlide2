@@ -10,6 +10,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +44,19 @@ public class ActiveCache {
         value.setCallback(valueCallback);
         //存储 --> 容器
         mapList.put(key, new CustomWeakReference(value, getQueue(), key));
+        //printMap("put");
+    }
+
+    private void printMap(String pre) {
+        Log.e(TAG, pre + "  mapList != null " + (mapList.size()));
+
+        if(mapList != null) {
+            Iterator it = mapList.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry entry  = (Map.Entry)it.next();
+                Log.e(TAG, pre + "  key: -> " + entry.getKey() + "  value: -> " + entry.getValue());
+            }
+        }
     }
 
     /**
@@ -52,6 +66,7 @@ public class ActiveCache {
      */
     public Value get(String key) {
         WeakReference<Value> valueWeakReference = mapList.get(key);
+        //printMap("get");
         if(null != valueWeakReference) {
             return valueWeakReference.get(); //返回value
         }
