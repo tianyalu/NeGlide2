@@ -24,7 +24,7 @@
                 android:textAllCaps="false"/>
             <ImageView
                 android:id="@+id/iv_image1"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -43,7 +43,7 @@
                 android:textAllCaps="false"/>
             <ImageView
                 android:id="@+id/iv_image2"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -61,10 +61,22 @@
                 android:textAllCaps="false"/>
             <ImageView
                 android:id="@+id/iv_image3"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_pool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="btnPool"
+            android:textAllCaps="false"/>
+        <ImageView
+            android:id="@+id/iv_image4"
+            android:layout_marginTop="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>
